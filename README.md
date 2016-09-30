@@ -1,5 +1,5 @@
 # zoomaster
-CS319-Fall 2016 project of group number 3
+CS319-Fall 2016 project of group number 3.
 
 Group Members are as following: 
 
