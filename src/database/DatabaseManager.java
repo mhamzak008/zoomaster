@@ -180,7 +180,7 @@ public class DatabaseManager {
 		return true;
 	}
 	
-	public boolean removeDataEntry(int index){
+	public boolean removeDataEntry(int index,int typeKey){
 		Connection con = null;
 		Statement stmt = null;
 		
@@ -199,9 +199,16 @@ public class DatabaseManager {
 			// Create statement
 			stmt = con.createStatement();
 			
-			// Delete from animal
-			String sql = "DELETE FROM animal WHERE sID=" + index + ";";
-			stmt.executeUpdate(sql);
+			String sql;
+			if(typeKey == 0) {
+				// Delete from animal
+				sql = "DELETE FROM animal WHERE sID=" + index + ";";
+				stmt.executeUpdate(sql);
+			} else {
+				// Delete from plant
+				sql = "DELETE FROM plant WHERE sID=" + index + ";";
+				stmt.executeUpdate(sql);
+			}
 			
 			// Delete from species
 			sql = "DELETE FROM species WHERE sID=" + index + ";";
@@ -234,7 +241,7 @@ public class DatabaseManager {
 		//we first remove that row, then add the modified species as a new row.
 		
 		// Delete from database
-		boolean b = removeDataEntry(index);
+		boolean b = removeDataEntry(index, s.getType());
 		
 		if(b){
 			// Add new entry
@@ -244,6 +251,49 @@ public class DatabaseManager {
 		}
 		
 		return false;
+	}
+	
+	public Species getDataEntry(int index, int typeKey){
+		Connection con = null;
+		Statement stmt = null;
+		Species s = null;
+		
+		final String DB_DRIVER = "com.mysql.jdbc.Driver";
+		final String HOST_URL = "jdbc:mysql://localhost/zoomaster";
+		final String DB_USER = "root";
+		final String DB_PASS = "12345";
+		
+		try{
+			// Register driver
+			Class.forName(DB_DRIVER);
+			
+			// Get connection
+			con = DriverManager.getConnection(HOST_URL, DB_USER, DB_PASS);
+			
+			// Create statement
+			stmt = con.createStatement();
+			
+					
+		}catch(SQLException se){
+			return null;
+		}catch(Exception e){
+			return null;
+		}finally{
+			// Close statement and connection
+			try{
+				if(stmt != null){
+					stmt.close();
+					con.close();
+				}
+			}catch(SQLException e){}				
+			
+			try{
+				if(con!=null) con.close();
+		    }catch(SQLException e){
+		         e.printStackTrace();
+		    }			
+		}
+		return s;
 	}
 	
 	public static DatabaseManager getInstance(){
