@@ -336,6 +336,61 @@ public class DatabaseManager {
 		return result;
 	}
 	
+	public ArrayList<Species> getFeedingTimes(){
+		Connection con = null;
+		Statement stmt = null;
+		ArrayList<Species> result = new ArrayList<Species>();
+		
+		final String DB_DRIVER = "com.mysql.jdbc.Driver";
+		final String HOST_URL = "jdbc:mysql://localhost/zoomaster";
+		final String DB_USER = "root";
+		final String DB_PASS = "12345";
+		
+		try{
+			// Register driver
+			Class.forName(DB_DRIVER);
+			
+			// Get connection
+			con = DriverManager.getConnection(HOST_URL, DB_USER, DB_PASS);
+			
+			// Create statement
+			stmt = con.createStatement();
+			
+			// Get species values
+			String sql = "SELECT sID, feeding_time, name FROM species";
+			ResultSet rs = stmt.executeQuery(sql);
+					
+			// Add species to the result after getting animal or plant values
+			while(rs.next()){
+				String name = rs.getString("name");
+				String feedingTime = rs.getTime("feeding_time").toString();
+				int sID = rs.getInt("sID");
+				
+				Species s = new Species(0, sID, -1, null, name, feedingTime, null, null, null);
+				result.add(s);
+			}
+		}catch(SQLException se){
+			return null;
+		}catch(Exception e){
+			return null;
+		}finally{
+			// Close statement and connection
+			try{
+				if(stmt != null){
+					stmt.close();
+					con.close();
+				}
+			}catch(SQLException e){}				
+			
+			try{
+				if(con!=null) con.close();
+		    }catch(SQLException e){
+		         e.printStackTrace();
+		    }			
+		}
+		return result;
+	}
+	
 	public static DatabaseManager getInstance(){
 		if(instance == null){
 			instance = new DatabaseManager();
