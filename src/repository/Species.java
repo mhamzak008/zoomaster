@@ -11,7 +11,7 @@ public class Species {
 	
 	public Species(int type, int ID){
 		this.type = type;
-		if(id < 0)
+		if(ID < 0)
 			this.ID = id++;
 		else
 			this.ID = ID;
@@ -33,7 +33,7 @@ public class Species {
 		latinName = strings[2];
 		countryOfOrigin = strings[3];
 		gender = strings[4];
-		if(id < 0)
+		if(ID < 0)
 			this.ID = id++;
 		else
 			this.ID = ID;
@@ -74,7 +74,7 @@ public class Species {
 		return gender;
 	}
 
-	public int getID() {
+	public int getsID() {
 		// TODO Auto-generated method stub
 		return ID;
 	}
