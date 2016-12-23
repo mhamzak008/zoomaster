@@ -78,6 +78,10 @@ public class Species {
 		// TODO Auto-generated method stub
 		return ID;
 	}
+	
+	public static void setNewIDCount(int id){
+		Species.id = id;
+	}
 
 	public int getType() {
 		// TODO Auto-generated method stub
