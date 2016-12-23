@@ -88,10 +88,10 @@ public class DatabaseManager {
 			s.executeUpdate(sql);
 			
 			// Create animal table
-			sql = "CREATE TABLE IF NOT EXISTS animal(hibernate CHAR(1),"
+			sql = "CREATE TABLE IF NOT EXISTS animal(hibernate CHAR(1), "
 					+ "sID INT, PRIMARY KEY(sID), FOREIGN KEY(sID) REFERENCES species(sID) ON DELETE CASCADE ON UPDATE CASCADE, INDEX animal_index(sID) USING HASH)"
-					+ "ENGINE=InnoDB;";
-			s.executeUpdate("sql");
+					+ " ENGINE=InnoDB;";
+			s.executeUpdate(sql);
 			
 			//Create plant table
 			sql = "CREATE TABLE IF NOT EXISTS plant(light_need FLOAT,"
@@ -100,8 +100,10 @@ public class DatabaseManager {
 			s.executeUpdate(sql);
 			
 		}catch(SQLException se){
+			se.printStackTrace();
 			return false;
 		}catch(Exception e){
+			e.printStackTrace();
 			return false;
 		}finally{
 			// Close statement and connection
@@ -142,8 +144,8 @@ public class DatabaseManager {
 			stmt = con.createStatement();
 			
 			// Insert into species
-			String sql = "INSERT INTO species VALUES("+ s.getName() + ", " + s.getLatinName() + ", " + s.getCountry() + ", " +
-					s.getType() + ", " + s.getFeedingTime() + ", " + s.getImage() + ", " + s.getAge() + ", " + s.getGender() + ", " 
+			String sql = "INSERT INTO species VALUES('"+ s.getName() + "', '" + s.getLatinName() + "', '" + s.getCountry() + "', " +
+					s.getType() + ", '" + s.getFeedingTime() + "', " + s.getImage() + ", " + s.getAge() + ", '" + s.getGender() + "', " 
 					+ s.getsID() + ");";
 			stmt.executeUpdate(sql);
 			
@@ -152,20 +154,22 @@ public class DatabaseManager {
 				// Insert into animal
 				Animal a = (Animal) s;
 				
-				sql = "INSERT INTO animal VALUES(" + a.doesHibernate() + "," + a.getsID() + ");";
+				sql = "INSERT INTO animal VALUES('" + a.doesHibernate() + "'," + a.getsID() + ");";
 				stmt.executeUpdate(sql);
 			} else {
 				// Insert into animal
 				Plant p = (Plant) s;
 				
-				sql = "INSERT INTO plant VALUES(" + p.getLightNeed() + ", " + p.getLightTime() + ", "
+				sql = "INSERT INTO plant VALUES(" + p.getLightNeed() + ", '" + p.getLightTime() + "', "
 						+ p.getsID() + ");";
 				stmt.executeUpdate(sql);
 			}
 			
 		}catch(SQLException se){
+			se.printStackTrace();
 			return false;
 		}catch(Exception e){
+			e.printStackTrace();
 			return false;
 		}finally{
 			// Close statement and connection
@@ -389,6 +393,60 @@ public class DatabaseManager {
 		    }			
 		}
 		return result;
+	}
+	
+	public boolean setID(){
+		Connection con = null;
+		Statement stmt = null;
+		
+		final String DB_DRIVER = "com.mysql.jdbc.Driver";
+		final String HOST_URL = "jdbc:mysql://localhost/zoomaster";
+		final String DB_USER = "root";
+		final String DB_PASS = "12345";
+		
+		try{
+			// Register driver
+			Class.forName(DB_DRIVER);
+			
+			// Get connection
+			con = DriverManager.getConnection(HOST_URL, DB_USER, DB_PASS);
+			
+			// Create statement
+			stmt = con.createStatement();
+			
+			// Get species values
+			String sql = "SELECT MAX(sID) as sID FROM species";
+			ResultSet rs = stmt.executeQuery(sql);
+					
+			// Add species to the result after getting animal or plant values
+			while(rs.next()){
+
+				int sID = rs.getInt("sID");
+				
+				Species.setNewIDCount(sID+1);
+			}
+		}catch(SQLException se){
+			se.printStackTrace();
+			return false;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			// Close statement and connection
+			try{
+				if(stmt != null){
+					stmt.close();
+					con.close();
+				}
+			}catch(SQLException e){}				
+			
+			try{
+				if(con!=null) con.close();
+		    }catch(SQLException e){
+		         e.printStackTrace();
+		    }			
+		}
+		return true;
 	}
 	
 	public static DatabaseManager getInstance(){
