@@ -94,8 +94,8 @@ public class DatabaseManager {
 			s.executeUpdate(sql);
 			
 			//Create plant table
-			sql = "CREATE TABLE IF NOT EXISTS plant(light_need FLOAT,"
-					+ "light_time TIME, sID INT, PRIMARY KEY(sID), FOREIGN KEY(sID)"
+			sql = "CREATE TABLE IF NOT EXISTS plant(light_time_start TIME,"
+					+ "light_time_end TIME, sID INT, PRIMARY KEY(sID), FOREIGN KEY(sID)"
 					+ "REFERENCES species(sID)  ON DELETE CASCADE ON UPDATE CASCADE, INDEX plant_index(sID) USING HASH) ENGINE=InnoDB;";
 			s.executeUpdate(sql);
 			
@@ -160,7 +160,7 @@ public class DatabaseManager {
 				// Insert into animal
 				Plant p = (Plant) s;
 				
-				sql = "INSERT INTO plant VALUES(" + p.getLightNeed() + ", '" + p.getLightTime() + "', "
+				sql = "INSERT INTO plant VALUES(" + p.getLightTimeStart() + ", '" + p.getLightTimeEnd() + "', "
 						+ p.getsID() + ");";
 				stmt.executeUpdate(sql);
 			}
@@ -310,9 +310,9 @@ public class DatabaseManager {
 					sql = "SELECT * FROM plant WHERE sID=" + sID + ";";
 					ResultSet r = stmt.executeQuery(sql);
 					
-					float lightNeed = r.getFloat("light_need");
-					String lightTime = r.getTime("light_time").toString(); 
-					Plant p = new Plant(sID, lightNeed, lightTime, age, image, sName, feedingTime, lName, country, gender);
+					String lightTimeStart = r.getTime("light_time_start").toString(); 
+					String lightTimeEnd = r.getTime("light_time_end").toString(); 
+					Plant p = new Plant(sID, lightTimeStart, lightTimeEnd, age, image, sName, feedingTime, lName, country, gender);
 					result.add(p);
 				}
 				
@@ -361,7 +361,7 @@ public class DatabaseManager {
 			stmt = con.createStatement();
 			
 			// Get species values
-			String sql = "SELECT sID, feeding_time, name FROM species";
+			String sql = "SELECT sID, feeding_time, name, type FROM species";
 			ResultSet rs = stmt.executeQuery(sql);
 					
 			// Add species to the result after getting animal or plant values
@@ -369,9 +369,19 @@ public class DatabaseManager {
 				String name = rs.getString("name");
 				String feedingTime = rs.getTime("feeding_time").toString();
 				int sID = rs.getInt("sID");
+				int type = rs.getInt("type");
 				
-				Species s = new Species(0, sID, -1, null, name, feedingTime, null, null, null);
-				result.add(s);
+				if(type == 0){
+					Species s = new Species(0, sID, -1, null, name, feedingTime, null, null, null);
+					result.add(s);
+				}else{
+					sql = "SELECT light_time_start, light_time_end FROM plant WHERE sID=" + sID + ";";
+					ResultSet s = stmt.executeQuery(sql);
+					String lightTimeStart = s.getTime("light_time_start").toString();
+					String lightTimeEnd = s.getTime("light_time_end").toString();
+					Plant p = new Plant(sID,lightTimeStart,lightTimeEnd,-1, null, name, feedingTime, null, null, null);
+					result.add(p);
+				}
 			}
 		}catch(SQLException se){
 			return null;
