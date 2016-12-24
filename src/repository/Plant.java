@@ -4,29 +4,29 @@ import java.awt.image.BufferedImage;
 
 public class Plant extends Species{
 	
-	float lightNeed;
-	String lightTime; // Because of MySQL constraints it should be a string in format "HH:MM:SS"
+	String lightTimeEnd;
+	String lightTimeStart; // Because of MySQL constraints it should be a string in format "HH:MM:SS"
 
 	public Plant(int sID){
 		super(1, sID);
-		lightNeed = 0;
-		lightTime = "HH:MM:SS";
+		lightTimeStart = "HH:MM:SS";
+		lightTimeEnd = "HH:MM:SS";
 	}
 	
-	public Plant(int sID, float lightNeed, String lightTime, int age, BufferedImage image, String...strings){
-		super(1, sID, age, image, strings[0], strings[1], strings[2], strings[3],strings[4]);
-		this.lightNeed = lightNeed;
-		this.lightTime = lightTime;
+	public Plant(int sID, String lightTimeStart, String lightTimeEnd, int age, BufferedImage image, String...strings){
+		super(1	, sID, age, image, strings[0], strings[1], strings[2], strings[3],strings[4]);
+		this.lightTimeStart = lightTimeStart;
+		this.lightTimeEnd = lightTimeEnd;
 	}
 	
-	public float getLightNeed() {
+	public String getLightTimeEnd() {
 		// TODO Auto-generated method stub
-		return lightNeed;
+		return lightTimeEnd;
 	}
 
-	public String getLightTime() {
+	public String getLightTimeStart() {
 		// TODO Auto-generated method stub
-		return lightTime;
+		return lightTimeStart;
 	}
 
 }
