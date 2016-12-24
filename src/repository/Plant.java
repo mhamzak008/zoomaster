@@ -4,8 +4,8 @@ import java.awt.image.BufferedImage;
 
 public class Plant extends Species{
 	
-	String lightTimeEnd;
-	String lightTimeStart; // Because of MySQL constraints it should be a string in format "HH:MM:SS"
+	private String lightTimeEnd;
+	private String lightTimeStart; // Because of MySQL constraints it should be a string in format "HH:MM:SS"
 
 	public Plant(int sID){
 		super(1, sID);

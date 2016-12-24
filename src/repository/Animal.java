@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 public class Animal extends Species{
 	
-	char doesHibernate;
+	private char doesHibernate;
 
 	public Animal(int sID){
 		super(0, sID);
