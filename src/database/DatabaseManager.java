@@ -157,7 +157,7 @@ public class DatabaseManager {
 					s.getType() + ", '" + s.getFeedingTime() + "', ?, " + s.getAge() + ", '" + s.getGender() + "', " 
 					+ s.getsID() + ");";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setBinaryStream(5, in, in.available());
+			ps.setBinaryStream(1, in, in.available());
 			int i = ps.executeUpdate();
 			
 			// If it is animal
