@@ -1,8 +1,12 @@
 package database;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.sql.*;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 import repository.Animal;
 import repository.Plant;
@@ -83,7 +87,7 @@ public class DatabaseManager {
 			// Create species tables
 			String sql = "CREATE TABLE IF NOT EXISTS species(name VARCHAR(50),"
 					+ "latin_name VARCHAR(50), country_of_origin VARCHAR(50), type INT,"
-					+ "feeding_time TIME, picture BLOB, age INT, gender VARCHAR(15),"
+					+ "feeding_time TIME, picture MEDIUMBLOB, age INT, gender VARCHAR(15),"
 					+ "sID INT, PRIMARY KEY(sID), INDEX species_index(name) USING HASH) ENGINE= InnoDB;";
 			s.executeUpdate(sql);
 			
@@ -142,12 +146,19 @@ public class DatabaseManager {
 			
 			// Create statement
 			stmt = con.createStatement();
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			ImageIO.write(s.getImage(), "jpeg", out);
+			byte[] buf = out.toByteArray();
+			ByteArrayInputStream in = new ByteArrayInputStream(buf);
+			
 			
 			// Insert into species
 			String sql = "INSERT INTO species VALUES('"+ s.getName() + "', '" + s.getLatinName() + "', '" + s.getCountry() + "', " +
-					s.getType() + ", '" + s.getFeedingTime() + "', " + s.getImage() + ", " + s.getAge() + ", '" + s.getGender() + "', " 
+					s.getType() + ", '" + s.getFeedingTime() + "', ?, " + s.getAge() + ", '" + s.getGender() + "', " 
 					+ s.getsID() + ");";
-			stmt.executeUpdate(sql);
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setBinaryStream(5, in, in.available());
+			int i = ps.executeUpdate();
 			
 			// If it is animal
 			if(s.getType() == 0){
@@ -295,7 +306,10 @@ public class DatabaseManager {
 				String country = rs.getString("country_of_origin");
 				String gender = rs.getString("gender");
 				String feedingTime = rs.getTime("feeding_time").toString();
-				BufferedImage image = (BufferedImage) rs.getBlob("picture");
+				Blob blob = rs.getBlob("picture");
+				int blobLength = (int) blob.length();
+				byte[] bytes = blob.getBytes(1, blobLength);
+				BufferedImage image = ImageIO.read(new ByteArrayInputStream(bytes));
 				int type = rs.getInt("type");
 				
 				if(type == 0){
