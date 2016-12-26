@@ -405,11 +405,10 @@ public class DatabaseManager {
 					sql = "SELECT light_time_start, light_time_end FROM plant WHERE sID=" + sID + ";";
 					ResultSet s = st.executeQuery(sql);
 					
-					
 					if(s.next()){
 						String lightTimeStart = s.getTime("light_time_start").toString();
 						String lightTimeEnd = s.getTime("light_time_end").toString();
-						Plant p = new Plant(-1, lightTimeStart, lightTimeEnd, -1, null, name, feedingTime, null, null, null);
+						Plant p = new Plant(sID, lightTimeStart, lightTimeEnd, -1, null, name, feedingTime, null, null, null);
 						result.add(p);
 					}
 				}
