@@ -395,8 +395,7 @@ public class DatabaseManager {
 			while(rs.next()){
 				String name = rs.getString("name");
 				String feedingTime = rs.getTime("feeding_time").toString();
-				int sID = rs.getInt("sID");
-				System.out.println(sID);	
+				int sID = rs.getInt("sID");	
 				int type = rs.getInt("type");
 				
 				if(type == 0){
