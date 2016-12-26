@@ -22,6 +22,21 @@ public class PlantAddScreen extends javax.swing.JPanel {
     {
        return wateringTimeTP.getTimeStringOrEmptyString();
     }
+    
+    public String getLightTone()
+    {
+        return lightToneTF.getText();
+    }
+    
+    public String getLightTimeStart()
+    {
+        return lightTimeStartTP.getTimeStringOrEmptyString();
+    }
+    
+    public String getLightTimeEnd()
+    {
+        return lightTimeEndTP.getTimeStringOrEmptyString();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,9 +50,11 @@ public class PlantAddScreen extends javax.swing.JPanel {
         wateringTimeL = new javax.swing.JLabel();
         lightToneL = new javax.swing.JLabel();
         lightToneTF = new javax.swing.JTextField();
-        noL = new javax.swing.JLabel();
-        noS = new javax.swing.JSpinner();
         wateringTimeTP = new com.github.lgooddatepicker.components.TimePicker();
+        lightTimeStartL = new javax.swing.JLabel();
+        lightTimeStartTP = new com.github.lgooddatepicker.components.TimePicker();
+        lightTimeEndL = new javax.swing.JLabel();
+        lightTimeEndTP = new com.github.lgooddatepicker.components.TimePicker();
 
         setPreferredSize(new java.awt.Dimension(400, 150));
 
@@ -45,53 +62,71 @@ public class PlantAddScreen extends javax.swing.JPanel {
 
         lightToneL.setText("Light Tone:");
 
-        noL.setText("No. of Plants:");
+        lightToneTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lightToneTFActionPerformed(evt);
+            }
+        });
 
-        noS.setPreferredSize(new java.awt.Dimension(50, 25));
+        lightTimeStartL.setText("Light Time Start:");
+
+        lightTimeEndL.setText("Light Time End:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(wateringTimeL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(wateringTimeTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(wateringTimeL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(wateringTimeTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(noL)
-                            .addComponent(lightToneL))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lightToneTF, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(noS, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 206, Short.MAX_VALUE))
+                    .addComponent(lightTimeStartL)
+                    .addComponent(lightToneL))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lightTimeStartTP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lightToneTF)))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lightTimeEndL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lightTimeEndTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(wateringTimeL)
                     .addComponent(wateringTimeTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lightToneL)
                     .addComponent(lightToneTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(noL)
-                    .addComponent(noS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lightTimeStartL)
+                    .addComponent(lightTimeStartTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lightTimeEndL)
+                    .addComponent(lightTimeEndTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lightToneTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lightToneTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lightToneTFActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lightTimeEndL;
+    private com.github.lgooddatepicker.components.TimePicker lightTimeEndTP;
+    private javax.swing.JLabel lightTimeStartL;
+    private com.github.lgooddatepicker.components.TimePicker lightTimeStartTP;
     private javax.swing.JLabel lightToneL;
     private javax.swing.JTextField lightToneTF;
-    private javax.swing.JLabel noL;
-    private javax.swing.JSpinner noS;
     private javax.swing.JLabel wateringTimeL;
     private com.github.lgooddatepicker.components.TimePicker wateringTimeTP;
     // End of variables declaration//GEN-END:variables

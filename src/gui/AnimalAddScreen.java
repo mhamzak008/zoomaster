@@ -50,8 +50,6 @@ public class AnimalAddScreen extends javax.swing.JPanel {
         genderL = new javax.swing.JLabel();
         maleRB = new javax.swing.JRadioButton();
         femaleRB = new javax.swing.JRadioButton();
-        noL = new javax.swing.JLabel();
-        noChooser = new javax.swing.JSpinner();
         timePicker1 = new com.github.lgooddatepicker.components.TimePicker();
 
         feedingTimeL.setText("Feeding Time:");
@@ -74,10 +72,6 @@ public class AnimalAddScreen extends javax.swing.JPanel {
             }
         });
 
-        noL.setText("No. Of Animals:");
-
-        noChooser.setPreferredSize(new java.awt.Dimension(50, 25));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,16 +83,12 @@ public class AnimalAddScreen extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(noL)
-                            .addComponent(genderL))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(maleRB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(noChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(genderL)
+                        .addGap(18, 18, 18)
+                        .addComponent(maleRB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(femaleRB)))
-                .addGap(0, 213, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,10 +101,7 @@ public class AnimalAddScreen extends javax.swing.JPanel {
                     .addComponent(genderL)
                     .addComponent(maleRB)
                     .addComponent(femaleRB))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(noL)
-                    .addComponent(noChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(43, 43, 43))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -133,8 +120,6 @@ public class AnimalAddScreen extends javax.swing.JPanel {
     private javax.swing.ButtonGroup genderBG;
     private javax.swing.JLabel genderL;
     private javax.swing.JRadioButton maleRB;
-    private javax.swing.JSpinner noChooser;
-    private javax.swing.JLabel noL;
     private com.github.lgooddatepicker.components.TimePicker timePicker1;
     // End of variables declaration//GEN-END:variables
 }

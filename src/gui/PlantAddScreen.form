@@ -22,45 +22,51 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <Component id="wateringTimeL" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="wateringTimeTP" min="-2" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="wateringTimeL" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="wateringTimeTP" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="noL" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lightToneL" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lightToneTF" min="-2" pref="118" max="-2" attributes="0"/>
-                          <Component id="noS" min="-2" pref="50" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="lightTimeStartL" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lightToneL" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="206" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="lightTimeStartTP" max="32767" attributes="0"/>
+                  <Component id="lightToneTF" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+          <Group type="102" attributes="0">
+              <Component id="lightTimeEndL" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="lightTimeEndTP" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="wateringTimeL" min="-2" max="-2" attributes="0"/>
-                  <Component id="wateringTimeTP" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="wateringTimeL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="wateringTimeTP" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lightToneL" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lightToneTF" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="noL" min="-2" max="-2" attributes="0"/>
-                  <Component id="noS" alignment="0" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lightTimeStartL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lightTimeStartTP" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lightTimeEndL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lightTimeEndTP" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -77,20 +83,25 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="lightToneTF">
-    </Component>
-    <Component class="javax.swing.JLabel" name="noL">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="No. of Plants:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JSpinner" name="noS">
-      <Properties>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[50, 25]"/>
-        </Property>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lightToneTFActionPerformed"/>
+      </Events>
     </Component>
     <Component class="com.github.lgooddatepicker.components.TimePicker" name="wateringTimeTP">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lightTimeStartL">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Light Time Start:"/>
+      </Properties>
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="lightTimeStartTP">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lightTimeEndL">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Light Time End:"/>
+      </Properties>
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="lightTimeEndTP">
     </Component>
   </SubComponents>
 </Form>

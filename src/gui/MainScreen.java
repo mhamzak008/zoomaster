@@ -26,26 +26,26 @@ public class MainScreen extends javax.swing.JPanel {
         // getting species stored 
         ArrayList<Species> species = db.getFeedingTimes();
         
-        String dailyTasks = "Daily Tasks: ";
+        String dailyTasks = "<html>Daily Tasks: ";
         if(species != null)
         {
             for(int i = 0; i < species.size(); i++)
             {
                 if(species.get(i).getType() == 0) // It's an animal
                 {
-                    dailyTasks = dailyTasks + "\n Feed animal " + species.get(i).getName() + " with ID " 
+                    dailyTasks = dailyTasks + "<br/> Feed animal " + species.get(i).getName() + " with ID " 
                                             + species.get(i).getsID() + " at time " + species.get(i).getFeedingTime();                
                 }
                 if(species.get(i).getType() == 1) // It's a plant
                 {
-                    dailyTasks = dailyTasks + "\n Water plant " + species.get(i).getName() + " with ID " 
+                    dailyTasks = dailyTasks + "<br/> Water plant " + species.get(i).getName() + " with ID " 
                                             + species.get(i).getsID() + " at time " + species.get(i).getFeedingTime();
                 }
             }
         }
+        dailyTasks += "</html>";
         
         dailyTasksL.setText(dailyTasks);
-        System.out.println("daily tasks: " + dailyTasks);
     }
    
     

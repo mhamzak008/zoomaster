@@ -51,12 +51,13 @@ public class AddScreen extends javax.swing.JPanel {
         specieSwitch = new javax.swing.JLayeredPane();
         animalAddScreen1 = new gui.AnimalAddScreen();
         plantAddScreen1 = new gui.PlantAddScreen();
-        notesL = new javax.swing.JLabel();
-        notesSP = new javax.swing.JScrollPane();
-        notesTA = new javax.swing.JTextArea();
+        plantAddScreen1.setVisible(false);
         addB = new javax.swing.JButton();
         imageL = new javax.swing.JLabel();
         imageAddB = new javax.swing.JButton();
+        clearFormB = new javax.swing.JButton();
+        ageL = new javax.swing.JLabel();
+        ageS = new javax.swing.JSpinner();
 
         buttonGroup1.add(animalRB);
         animalRB.setSelected(true);
@@ -93,32 +94,24 @@ public class AddScreen extends javax.swing.JPanel {
         specieSwitch.setLayout(specieSwitchLayout);
         specieSwitchLayout.setHorizontalGroup(
             specieSwitchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(specieSwitchLayout.createSequentialGroup()
-                .addComponent(animalAddScreen1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(animalAddScreen1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
             .addGroup(specieSwitchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(specieSwitchLayout.createSequentialGroup()
-                    .addComponent(plantAddScreen1, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(plantAddScreen1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         specieSwitchLayout.setVerticalGroup(
             specieSwitchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, specieSwitchLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(animalAddScreen1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+            .addGroup(specieSwitchLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(animalAddScreen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(specieSwitchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, specieSwitchLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(plantAddScreen1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(40, Short.MAX_VALUE)))
+                .addGroup(specieSwitchLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(plantAddScreen1, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
-
-        notesL.setText("Notes:");
-
-        notesTA.setColumns(20);
-        notesTA.setRows(5);
-        notesSP.setViewportView(notesTA);
 
         addB.setText("Add Specie");
         addB.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +129,15 @@ public class AddScreen extends javax.swing.JPanel {
             }
         });
 
+        clearFormB.setText("Clear Form");
+        clearFormB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearFormBActionPerformed(evt);
+            }
+        });
+
+        ageL.setText("Age:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,41 +145,33 @@ public class AddScreen extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(animalRB)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(specieSwitch)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(latinNameL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nameL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(originCountryL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(originCountryTF, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
-                                    .addComponent(nameTF)
-                                    .addComponent(latinNameTF, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addComponent(animalRB))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(latinNameL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(nameL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(originCountryL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(ageL))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nameTF)
+                            .addComponent(latinNameTF, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(plantRB)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(imageL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(notesL, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(notesSP, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(addB, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 250, Short.MAX_VALUE)
-                                .addComponent(imageAddB, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(113, 113, 113))))))
+                                .addComponent(ageS, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 227, Short.MAX_VALUE))
+                            .addComponent(originCountryTF)))
+                    .addComponent(specieSwitch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imageAddB, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                    .addComponent(addB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(plantRB)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(clearFormB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(imageL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +181,16 @@ public class AddScreen extends javax.swing.JPanel {
                     .addComponent(animalRB)
                     .addComponent(plantRB))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(imageL, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(imageAddB)
+                        .addGap(18, 18, 18)
+                        .addComponent(addB)
+                        .addGap(24, 24, 24)
+                        .addComponent(clearFormB)
+                        .addGap(0, 29, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nameL)
@@ -200,18 +203,13 @@ public class AddScreen extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(originCountryL)
                             .addComponent(originCountryTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(specieSwitch, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(imageL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(imageAddB)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(notesSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(notesL))
-                    .addComponent(addB, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ageL)
+                            .addComponent(ageS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(specieSwitch)))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -311,9 +309,9 @@ public class AddScreen extends javax.swing.JPanel {
         }
         if(plantRB.isSelected())
         {
-            Plant plant = new Plant(-1, "11:11:11", "13:13:13", 00, badge, nameTF.getText(),
-                                    "11:11:11", latinNameTF.getText(), originCountryTF.getText(),
-                                     "13:12:11");
+            Plant plant = new Plant(-1, plantAddScreen1.getLightTimeStart(), plantAddScreen1.getLightTimeEnd(),
+                                    00, badge, nameTF.getText(), plantAddScreen1.getWateringTime(), 
+                                    latinNameTF.getText(), originCountryTF.getText(), plantAddScreen1.getLightTone());
             
             b = dm.addDataEntry(plant);
             System.out.println("Plant Added = " + b);
@@ -321,21 +319,25 @@ public class AddScreen extends javax.swing.JPanel {
         
     }//GEN-LAST:event_addBActionPerformed
 
+    private void clearFormBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFormBActionPerformed
+        
+    }//GEN-LAST:event_clearFormBActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addB;
+    private javax.swing.JLabel ageL;
+    private javax.swing.JSpinner ageS;
     private gui.AnimalAddScreen animalAddScreen1;
     private javax.swing.JRadioButton animalRB;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton clearFormB;
     private javax.swing.JButton imageAddB;
     private javax.swing.JLabel imageL;
     private javax.swing.JLabel latinNameL;
     private javax.swing.JTextField latinNameTF;
     private javax.swing.JLabel nameL;
     private javax.swing.JTextField nameTF;
-    private javax.swing.JLabel notesL;
-    private javax.swing.JScrollPane notesSP;
-    private javax.swing.JTextArea notesTA;
     private javax.swing.JLabel originCountryL;
     private javax.swing.JTextField originCountryTF;
     private gui.PlantAddScreen plantAddScreen1;
