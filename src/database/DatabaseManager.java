@@ -20,6 +20,7 @@ public class DatabaseManager {
 		
 	}
 	
+	// Creates database
 	public boolean createDatabase(){
 		Connection con = null;
 		Statement s = null;
@@ -65,6 +66,7 @@ public class DatabaseManager {
 		return true;
 	}
 	
+	// Creates tables
 	public boolean createTables(){
 		Connection con = null;
 		Statement s = null;
@@ -103,6 +105,10 @@ public class DatabaseManager {
 					+ "REFERENCES species(sID)  ON DELETE CASCADE ON UPDATE CASCADE, INDEX plant_index(sID) USING HASH) ENGINE=InnoDB;";
 			s.executeUpdate(sql);
 			
+			//Create password table
+			sql = "CREATE TABLE IF NOT EXISTS password(password VARCHAR(100), PRIMARY KEY(password));";
+			s.executeUpdate(sql);
+			
 		}catch(SQLException se){
 			se.printStackTrace();
 			return false;
@@ -127,6 +133,7 @@ public class DatabaseManager {
 		return true;
 	}
 	
+	// Adds tuple
 	public boolean addDataEntry(Species s){
 		
 		Connection con = null;
@@ -158,7 +165,7 @@ public class DatabaseManager {
 					+ s.getsID() + ");";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setBinaryStream(1, in, in.available());
-			int i = ps.executeUpdate();
+			ps.executeUpdate();
 			
 			// If it is animal
 			if(s.getType() == 0){
@@ -171,7 +178,7 @@ public class DatabaseManager {
 				// Insert into animal
 				Plant p = (Plant) s;
 				
-				sql = "INSERT INTO plant VALUES(" + p.getLightTimeStart() + ", '" + p.getLightTimeEnd() + "', "
+				sql = "INSERT INTO plant VALUES('" + p.getLightTimeStart() + "', '" + p.getLightTimeEnd() + "', "
 						+ p.getsID() + ");";
 				stmt.executeUpdate(sql);
 			}
@@ -200,6 +207,7 @@ public class DatabaseManager {
 		return true;
 	}
 	
+	// Removes tuple
 	public boolean removeDataEntry(int id,int typeKey){
 		Connection con = null;
 		Statement stmt = null;
@@ -256,6 +264,7 @@ public class DatabaseManager {
 		return true;
 	}
 	
+	// Modifies a tuple
 	public boolean modifyDataEntry(Species s){
 		//Since we do not know which value has been changed specifically,
 		//we first remove that row, then add the modified species as a new row.
@@ -273,6 +282,7 @@ public class DatabaseManager {
 		return false;
 	}
 	
+	// Returns tuples with their name starting with the search key
 	public ArrayList<Species> getDataEntry(String name){
 		Connection con = null;
 		Statement stmt = null;
@@ -354,6 +364,7 @@ public class DatabaseManager {
 		return result;
 	}
 	
+	// Returns feeding times of species
 	public ArrayList<Species> getFeedingTimes(){
 		Connection con = null;
 		Statement stmt = null;
@@ -419,6 +430,7 @@ public class DatabaseManager {
 		return result;
 	}
 	
+	// Set species id counter
 	public boolean setID(){
 		Connection con = null;
 		Statement stmt = null;
@@ -449,6 +461,112 @@ public class DatabaseManager {
 				
 				Species.setNewIDCount(sID+1);
 			}
+		}catch(SQLException se){
+			se.printStackTrace();
+			return false;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			// Close statement and connection
+			try{
+				if(stmt != null){
+					stmt.close();
+					con.close();
+				}
+			}catch(SQLException e){}				
+			
+			try{
+				if(con!=null) con.close();
+		    }catch(SQLException e){
+		         e.printStackTrace();
+		    }			
+		}
+		return true;
+	}
+	
+	// Get password String
+	public String getPassword(){
+		Connection con = null;
+		Statement stmt = null;
+		String password = null;
+		
+		final String DB_DRIVER = "com.mysql.jdbc.Driver";
+		final String HOST_URL = "jdbc:mysql://localhost/zoomaster";
+		final String DB_USER = "root";
+		final String DB_PASS = "12345";
+		
+		try{
+			// Register driver
+			Class.forName(DB_DRIVER);
+			
+			// Get connection
+			con = DriverManager.getConnection(HOST_URL, DB_USER, DB_PASS);
+			
+			// Create statement
+			stmt = con.createStatement();
+			
+			// Get password
+			String sql = "SELECT * FROM password;";
+			ResultSet rs = stmt.executeQuery(sql);
+					
+			// Get password from rs
+			while(rs.next()){
+
+				password = rs.getString("password");
+			}
+		}catch(SQLException se){
+			se.printStackTrace();
+			return null;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}finally{
+			// Close statement and connection
+			try{
+				if(stmt != null){
+					stmt.close();
+					con.close();
+				}
+			}catch(SQLException e){}				
+			
+			try{
+				if(con!=null) con.close();
+		    }catch(SQLException e){
+		         e.printStackTrace();
+		    }			
+		}
+		return password;
+	}
+	
+	// Set new password
+	public boolean setPassword(String pass){
+		Connection con = null;
+		Statement stmt = null;
+		
+		final String DB_DRIVER = "com.mysql.jdbc.Driver";
+		final String HOST_URL = "jdbc:mysql://localhost/zoomaster";
+		final String DB_USER = "root";
+		final String DB_PASS = "12345";
+		
+		try{
+			// Register driver
+			Class.forName(DB_DRIVER);
+			
+			// Get connection
+			con = DriverManager.getConnection(HOST_URL, DB_USER, DB_PASS);
+			
+			// Create statement
+			stmt = con.createStatement();
+			
+			// Delete previous values
+			String sql = "TRUNCATE TABLE password;";
+			stmt.executeUpdate(sql);
+			
+			// Add new password
+			sql = "INSERT INTO password VALUES('" + pass + "');";
+			stmt.executeUpdate(sql);
+					
 		}catch(SQLException se){
 			se.printStackTrace();
 			return false;
