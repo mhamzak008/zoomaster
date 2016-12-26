@@ -17,7 +17,25 @@ public class AnimalAddScreen extends javax.swing.JPanel {
     public AnimalAddScreen() {
         initComponents();
     }
-
+    
+    public String getGender()
+    {
+        if(femaleRB.isSelected())
+        {
+            return "Female";
+        }
+        if(maleRB.isSelected())
+        {
+            return "Male";
+        }
+        
+        return "NA";
+    }
+    
+    public String getFeedingTime()
+    {
+       return timePicker1.getTimeStringOrEmptyString();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

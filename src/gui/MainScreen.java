@@ -1,14 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
+
+import database.DatabaseManager;
+import java.util.ArrayList;
+import repository.Species;
 
 /**
  *
  * @author hamza
  */
+
 public class MainScreen extends javax.swing.JPanel {
 
     /**
@@ -16,6 +16,36 @@ public class MainScreen extends javax.swing.JPanel {
      */
     public MainScreen() {
         initComponents();
+    }
+    
+    public void updateDailyTasks()
+    {
+        // Getting access to Database
+        DatabaseManager db = DatabaseManager.getInstance();
+        
+        // getting species stored 
+        ArrayList<Species> species = db.getFeedingTimes();
+        
+        String dailyTasks = "Daily Tasks: ";
+        if(species != null)
+        {
+            for(int i = 0; i < species.size(); i++)
+            {
+                if(species.get(i).getType() == 0) // It's an animal
+                {
+                    dailyTasks = dailyTasks + "\n Feed animal " + species.get(i).getName() + " with ID " 
+                                            + species.get(i).getsID() + " at time " + species.get(i).getFeedingTime();                
+                }
+                if(species.get(i).getType() == 1) // It's a plant
+                {
+                    dailyTasks = dailyTasks + "\n Water plant " + species.get(i).getName() + " with ID " 
+                                            + species.get(i).getsID() + " at time " + species.get(i).getFeedingTime();
+                }
+            }
+        }
+        
+        dailyTasksL.setText(dailyTasks);
+        System.out.println("daily tasks: " + dailyTasks);
     }
    
     
@@ -31,17 +61,31 @@ public class MainScreen extends javax.swing.JPanel {
     private void initComponents() {
 
         dailyTasks = new javax.swing.JPanel();
+        dailyTasksL = new javax.swing.JLabel();
         calendarPanel1 = new com.github.lgooddatepicker.components.CalendarPanel();
+
+        dailyTasksL.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        dailyTasksL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dailyTasksLMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout dailyTasksLayout = new javax.swing.GroupLayout(dailyTasks);
         dailyTasks.setLayout(dailyTasksLayout);
         dailyTasksLayout.setHorizontalGroup(
             dailyTasksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 133, Short.MAX_VALUE)
+            .addGroup(dailyTasksLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(dailyTasksL, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                .addContainerGap())
         );
         dailyTasksLayout.setVerticalGroup(
             dailyTasksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
+            .addGroup(dailyTasksLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(dailyTasksL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         calendarPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -67,19 +111,24 @@ public class MainScreen extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dailyTasks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(calendarPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(calendarPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void calendarPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calendarPanel1MouseClicked
-        // TODO add your handling code here:
+        updateDailyTasks();      
         
     }//GEN-LAST:event_calendarPanel1MouseClicked
+
+    private void dailyTasksLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dailyTasksLMouseClicked
+        updateDailyTasks();
+    }//GEN-LAST:event_dailyTasksLMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.github.lgooddatepicker.components.CalendarPanel calendarPanel1;
     private javax.swing.JPanel dailyTasks;
+    private javax.swing.JLabel dailyTasksL;
     // End of variables declaration//GEN-END:variables
 }

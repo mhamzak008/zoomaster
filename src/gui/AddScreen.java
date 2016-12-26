@@ -15,6 +15,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import repository.Animal;
+import repository.Plant;
 
 /**
  *
@@ -142,17 +143,6 @@ public class AddScreen extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(notesL, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(notesSP, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(addB, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(imageAddB, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(113, 113, 113))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(specieSwitch)
@@ -173,7 +163,21 @@ public class AddScreen extends javax.swing.JPanel {
                                 .addComponent(plantRB)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(imageL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(notesL, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(notesSP, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(addB, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 250, Short.MAX_VALUE)
+                                .addComponent(imageAddB, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(113, 113, 113))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,13 +205,13 @@ public class AddScreen extends javax.swing.JPanel {
                     .addComponent(imageL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(imageAddB)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(notesSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(notesL))
                     .addComponent(addB, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -285,30 +289,36 @@ public class AddScreen extends javax.swing.JPanel {
     }//GEN-LAST:event_imageAddBActionPerformed
 
     private void addBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBActionPerformed
-        // TODO add your handling code here:
-        // Getting Image
+        // Getting Image and saving it into badge
         Rectangle rec = imageL.getBounds();
         BufferedImage badge = new BufferedImage(rec.width, rec.height, BufferedImage.TYPE_INT_ARGB);
         imageL.paint(badge.getGraphics());
-        // Now badge has the image to be saved any where
         
+        // Getting database access
         DatabaseManager dm = DatabaseManager.getInstance();
-        boolean b;
-//        b = dm.createDatabase();
-//        System.out.println(b);
-//        b=dm.createTables();
-//        System.out.println(b);
-        b = dm.setID();
-        System.out.println(b);
+        boolean b; // database test variable
         
+        // Creating specie and adding it to the database 
         if(animalRB.isSelected())
-        {
-            Animal animal = new Animal(11, 'y', 23, badge, "test", "12:50", "test2", "test3", "test4,", "test5");
+        {          
+            
+            Animal animal = new Animal(-1, 'n', 00, badge, nameTF.getText(), 
+                                       animalAddScreen1.getFeedingTime(), latinNameTF.getText(), originCountryTF.getText(), 
+                                       animalAddScreen1.getGender());
             
             b = dm.addDataEntry(animal);
-            System.out.println(b);            
+            System.out.println("Animal Added = " + b);            
         }
+        if(plantRB.isSelected())
+        {
+            Plant plant = new Plant(-1, "11:11:11", "13:13:13", 00, badge, nameTF.getText(),
+                                    "11:11:11", latinNameTF.getText(), originCountryTF.getText(),
+                                     "13:12:11");
             
+            b = dm.addDataEntry(plant);
+            System.out.println("Plant Added = " + b);
+        }        
+        
     }//GEN-LAST:event_addBActionPerformed
 
 

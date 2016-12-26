@@ -17,6 +17,11 @@ public class PlantAddScreen extends javax.swing.JPanel {
     public PlantAddScreen() {
         initComponents();
     }
+    
+    public String getWateringTime()
+    {
+       return wateringTimeTP.getTimeStringOrEmptyString();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

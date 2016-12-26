@@ -5,6 +5,8 @@
  */
 package gui;
 
+import database.DatabaseManager;
+
 /**
  *
  * @author hamza
@@ -93,15 +95,15 @@ public class Zoomaster extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         
-//        // Setting up the database
-//        DatabaseManager dm = DatabaseManager.getInstance();
-//        boolean b;
-////        b = dm.createDatabase();
-////        System.out.println(b);
-////        b=dm.createTables();
-////        System.out.println(b);
-//        b = dm.setID();
-//        System.out.println(b);    
+        // Setting up the database
+        DatabaseManager dm = DatabaseManager.getInstance();
+        boolean b;
+//        b = dm.createDatabase();
+//        System.out.println(b);
+//        b=dm.createTables();
+//        System.out.println(b);
+        b = dm.setID();
+        System.out.println(b);    
        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
