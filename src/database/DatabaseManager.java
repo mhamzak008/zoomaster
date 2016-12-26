@@ -368,6 +368,7 @@ public class DatabaseManager {
 	public ArrayList<Species> getFeedingTimes(){
 		Connection con = null;
 		Statement stmt = null;
+		Statement st = null;
 		ArrayList<Species> result = new ArrayList<Species>();
 		
 		final String DB_DRIVER = "com.mysql.jdbc.Driver";
@@ -384,6 +385,7 @@ public class DatabaseManager {
 			
 			// Create statement
 			stmt = con.createStatement();
+			st = con.createStatement();
 			
 			// Get species values
 			String sql = "SELECT sID, feeding_time, name, type FROM species";
@@ -394,6 +396,7 @@ public class DatabaseManager {
 				String name = rs.getString("name");
 				String feedingTime = rs.getTime("feeding_time").toString();
 				int sID = rs.getInt("sID");
+				System.out.println(sID);	
 				int type = rs.getInt("type");
 				
 				if(type == 0){
@@ -401,16 +404,22 @@ public class DatabaseManager {
 					result.add(s);
 				}else{
 					sql = "SELECT light_time_start, light_time_end FROM plant WHERE sID=" + sID + ";";
-					ResultSet s = stmt.executeQuery(sql);
-					String lightTimeStart = s.getTime("light_time_start").toString();
-					String lightTimeEnd = s.getTime("light_time_end").toString();
-					Plant p = new Plant(sID,lightTimeStart,lightTimeEnd,-1, null, name, feedingTime, null, null, null);
-					result.add(p);
+					ResultSet s = st.executeQuery(sql);
+					
+					
+					if(s.next()){
+						String lightTimeStart = s.getTime("light_time_start").toString();
+						String lightTimeEnd = s.getTime("light_time_end").toString();
+						Plant p = new Plant(-1, lightTimeStart, lightTimeEnd, -1, null, name, feedingTime, null, null, null);
+						result.add(p);
+					}
 				}
 			}
 		}catch(SQLException se){
+			se.printStackTrace();
 			return null;
 		}catch(Exception e){
+			e.printStackTrace();
 			return null;
 		}finally{
 			// Close statement and connection
