@@ -4,36 +4,21 @@
  * and open the template in the editor.
  */
 package gui;
-import database.DatabaseManager;
 
 /**
  *
  * @author hamza
  */
-public class Zoomaster extends javax.swing.JFrame {
-    
-    static DatabaseManager dm;
+public class Zoomaster extends javax.swing.JFrame {   
+  
     
     /**
      * Creates new form MainScreen
      */
-    public Zoomaster() {
-        dm = DatabaseManager.getInstance();
-        boolean b;
-//        b = dm.createDatabase();
-//        System.out.println(b);
-//        b=dm.createTables();
-//        System.out.println(b);
-        b = dm.setID();
-        System.out.println(b);
+    public Zoomaster() {      
         
         initComponents();
-    }
-    
-    public static DatabaseManager getDM()
-    {
-        return dm;
-    }
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -120,6 +105,7 @@ public class Zoomaster extends javax.swing.JFrame {
        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Zoomaster().setVisible(true);
             }

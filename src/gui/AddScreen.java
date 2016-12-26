@@ -292,11 +292,20 @@ public class AddScreen extends javax.swing.JPanel {
         imageL.paint(badge.getGraphics());
         // Now badge has the image to be saved any where
         
+        DatabaseManager dm = DatabaseManager.getInstance();
+        boolean b;
+//        b = dm.createDatabase();
+//        System.out.println(b);
+//        b=dm.createTables();
+//        System.out.println(b);
+        b = dm.setID();
+        System.out.println(b);
+        
         if(animalRB.isSelected())
         {
-            Animal animal = new Animal(11, 'y', 23, badge, "test", "test1", "test2", "test3", "test4,", "test5");
-            DatabaseManager dm = Zoomaster.getDM();
-            boolean b = dm.addDataEntry(animal);
+            Animal animal = new Animal(11, 'y', 23, badge, "test", "12:50", "test2", "test3", "test4,", "test5");
+            
+            b = dm.addDataEntry(animal);
             System.out.println(b);            
         }
             
