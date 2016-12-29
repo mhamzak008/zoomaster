@@ -15,7 +15,8 @@ public class MainScreen extends javax.swing.JPanel {
      * Creates new form MainScreen
      */
     public MainScreen() {
-        initComponents();        
+        initComponents();  
+        updateDailyTasks();
     }
     
     public void updateDailyTasks()
@@ -63,6 +64,17 @@ public class MainScreen extends javax.swing.JPanel {
         dailyTasks = new javax.swing.JPanel();
         dailyTasksL = new javax.swing.JLabel();
         calendarPanel1 = new com.github.lgooddatepicker.components.CalendarPanel();
+
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
 
         dailyTasksL.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         dailyTasksL.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -124,6 +136,14 @@ public class MainScreen extends javax.swing.JPanel {
     private void dailyTasksLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dailyTasksLMouseClicked
         updateDailyTasks();
     }//GEN-LAST:event_dailyTasksLMouseClicked
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        updateDailyTasks();
+    }//GEN-LAST:event_formFocusGained
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+    //    updateDailyTasks();
+    }//GEN-LAST:event_formMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -18,9 +18,20 @@ public class AnimalAddScreen extends javax.swing.JPanel {
         initComponents();
     }
     
+    public char getHibernation()
+    {
+        if (hibernateCB.isSelected())
+        {
+            return 'y';
+        }
+        
+        return 'n';
+    }
+    
     public void clear()
     {
         genderBG.clearSelection();
+        hibernateCB.setSelected(false);
     }
     
     public String getGender()
@@ -56,6 +67,8 @@ public class AnimalAddScreen extends javax.swing.JPanel {
         maleRB = new javax.swing.JRadioButton();
         femaleRB = new javax.swing.JRadioButton();
         feedingTimeP = new com.github.lgooddatepicker.components.TimePicker();
+        hibernateL = new javax.swing.JLabel();
+        hibernateCB = new javax.swing.JCheckBox();
 
         feedingTimeL.setText("Feeding Time:");
 
@@ -77,12 +90,18 @@ public class AnimalAddScreen extends javax.swing.JPanel {
             }
         });
 
+        hibernateL.setText("Hibernate:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(hibernateL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(hibernateCB))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(feedingTimeL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -93,7 +112,7 @@ public class AnimalAddScreen extends javax.swing.JPanel {
                         .addComponent(maleRB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(femaleRB)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +125,11 @@ public class AnimalAddScreen extends javax.swing.JPanel {
                     .addComponent(genderL)
                     .addComponent(maleRB)
                     .addComponent(femaleRB))
-                .addGap(43, 43, 43))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hibernateL)
+                    .addComponent(hibernateCB))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -125,6 +148,8 @@ public class AnimalAddScreen extends javax.swing.JPanel {
     private javax.swing.JRadioButton femaleRB;
     private javax.swing.ButtonGroup genderBG;
     private javax.swing.JLabel genderL;
+    private javax.swing.JCheckBox hibernateCB;
+    private javax.swing.JLabel hibernateL;
     private javax.swing.JRadioButton maleRB;
     // End of variables declaration//GEN-END:variables
 }

@@ -48,6 +48,11 @@ public class Zoomaster extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(800, 600));
         setSize(new java.awt.Dimension(800, 600));
 
+        mainScreen1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                mainScreen1MouseMoved(evt);
+            }
+        });
         jTabbedPane1.addTab("Main", mainScreen1);
         jTabbedPane1.addTab("Add", addScreen1);
         jTabbedPane1.addTab("tab3", firstPage1);
@@ -72,6 +77,10 @@ public class Zoomaster extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mainScreen1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainScreen1MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mainScreen1MouseMoved
 
     /**
      * @param args the command line arguments
@@ -99,10 +108,8 @@ public class Zoomaster extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Zoomaster.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>            
-                
-
-        
+        //</editor-fold>           
+                        
         // Setting up the database
         DatabaseManager dm = DatabaseManager.getInstance();
         boolean b;
@@ -111,7 +118,7 @@ public class Zoomaster extends javax.swing.JFrame {
 //        b=dm.createTables();
 //        System.out.println(b);
         b = dm.setID();        
-        System.out.println(b);    
+//        System.out.println(b);    
 //        b = dm.setPassword("hamza");
 //        System.out.println("Password Set: " + b);
 
@@ -128,8 +135,11 @@ public class Zoomaster extends javax.swing.JFrame {
         do
         {
             passCheck = pass.getPassCheck();
+            System.out.println(passCheck);
         } while (passCheck == false);
         
+        System.out.println("loop Exited");
+        passFrame.dispose();
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

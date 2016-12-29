@@ -305,7 +305,7 @@ public class AddScreen extends javax.swing.JPanel {
         if(animalRB.isSelected())
         {          
             
-            Animal animal = new Animal(-1, 'n', 00, badge, nameTF.getText(), 
+            Animal animal = new Animal(-1, animalAddScreen1.getHibernation(), 00, badge, nameTF.getText(), 
                                        animalAddScreen1.getFeedingTime(), latinNameTF.getText(), originCountryTF.getText(), 
                                        animalAddScreen1.getGender());
             
@@ -316,11 +316,12 @@ public class AddScreen extends javax.swing.JPanel {
         {
             Plant plant = new Plant(-1, plantAddScreen1.getLightTimeStart(), plantAddScreen1.getLightTimeEnd(),
                                     00, badge, nameTF.getText(), plantAddScreen1.getWateringTime(), 
-                                    latinNameTF.getText(), originCountryTF.getText(), plantAddScreen1.getLightTone());
+                                    latinNameTF.getText(), originCountryTF.getText(), plantAddScreen1.getGender());
             
             b = dm.addDataEntry(plant);
             System.out.println("Plant Added = " + b);
-        }        
+        }       
+              
         
     }//GEN-LAST:event_addBActionPerformed
 

@@ -23,6 +23,11 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <Component id="hibernateL" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="hibernateCB" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <Component id="feedingTimeL" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="feedingTimeP" min="-2" max="-2" attributes="0"/>
@@ -35,7 +40,7 @@
                       <Component id="femaleRB" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="10" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -52,7 +57,12 @@
                   <Component id="maleRB" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="femaleRB" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="hibernateL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="hibernateCB" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -91,6 +101,13 @@
       </Events>
     </Component>
     <Component class="com.github.lgooddatepicker.components.TimePicker" name="feedingTimeP">
+    </Component>
+    <Component class="javax.swing.JLabel" name="hibernateL">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hibernate:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="hibernateCB">
     </Component>
   </SubComponents>
 </Form>
