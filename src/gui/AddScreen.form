@@ -22,40 +22,48 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="animalRB" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="latinNameL" alignment="0" max="32767" attributes="0"/>
-                              <Component id="nameL" alignment="0" max="32767" attributes="0"/>
-                              <Component id="originCountryL" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="ageL" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="nameTF" max="32767" attributes="0"/>
-                          <Component id="latinNameTF" alignment="1" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="ageS" min="-2" pref="49" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="227" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="originCountryTF" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="specieSwitch" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="imageAddB" pref="144" max="32767" attributes="0"/>
-                  <Component id="addB" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="plantRB" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="363" max="-2" attributes="0"/>
+                      <Component id="animalRB" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="imageAddB" pref="144" max="32767" attributes="0"/>
+                          <Component id="addB" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="plantRB" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="clearFormB" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <Component id="clearFormB" max="32767" attributes="0"/>
-                  <Component id="imageL" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="latinNameL" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="nameL" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="originCountryL" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="ageL" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="nameTF" max="32767" attributes="0"/>
+                                  <Component id="latinNameTF" alignment="1" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="ageS" min="-2" pref="49" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="227" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="originCountryTF" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="specieSwitch" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="imageL" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>

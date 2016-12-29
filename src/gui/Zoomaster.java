@@ -6,6 +6,9 @@
 package gui;
 
 import database.DatabaseManager;
+import java.awt.Dimension;
+import javax.swing.JFrame;
+import security.PasswordManager;
 
 /**
  *
@@ -32,20 +35,23 @@ public class Zoomaster extends javax.swing.JFrame {
     private void initComponents() {
 
         jToggleButton1 = new javax.swing.JToggleButton();
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        mainScreen = new gui.MainScreen();
+        mainScreen1 = new gui.MainScreen();
         addScreen1 = new gui.AddScreen();
+        firstPage1 = new gui.FirstPage();
+        passwordChangeScreen1 = new gui.PasswordChangeScreen();
 
         jToggleButton1.setText("jToggleButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Zoo Master");
+        setTitle("mainFrame");
         setPreferredSize(new java.awt.Dimension(800, 600));
         setSize(new java.awt.Dimension(800, 600));
 
-        jTabbedPane1.addTab("Main", mainScreen);
+        jTabbedPane1.addTab("Main", mainScreen1);
         jTabbedPane1.addTab("Add", addScreen1);
+        jTabbedPane1.addTab("tab3", firstPage1);
+        jTabbedPane1.addTab("Change Password", passwordChangeScreen1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,7 +99,9 @@ public class Zoomaster extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Zoomaster.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
+        //</editor-fold>            
+                
+
         
         // Setting up the database
         DatabaseManager dm = DatabaseManager.getInstance();
@@ -102,9 +110,27 @@ public class Zoomaster extends javax.swing.JFrame {
 //        System.out.println(b);
 //        b=dm.createTables();
 //        System.out.println(b);
-        b = dm.setID();
+        b = dm.setID();        
         System.out.println(b);    
-       
+//        b = dm.setPassword("hamza");
+//        System.out.println("Password Set: " + b);
+
+        // Password Authentication
+        JFrame passFrame = new JFrame();
+        passFrame.setPreferredSize(new Dimension(500,250));
+        passFrame.pack();           
+        PasswordScreen pass = new PasswordScreen();
+        passFrame.add(pass);                
+        passFrame.setVisible(true);    
+        
+        boolean passCheck = false;
+        
+        do
+        {
+            passCheck = pass.getPassCheck();
+        } while (passCheck == false);
+        
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -117,9 +143,10 @@ public class Zoomaster extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.AddScreen addScreen1;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private gui.FirstPage firstPage1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToggleButton jToggleButton1;
-    private gui.MainScreen mainScreen;
+    private gui.MainScreen mainScreen1;
+    private gui.PasswordChangeScreen passwordChangeScreen1;
     // End of variables declaration//GEN-END:variables
 }

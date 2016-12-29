@@ -15,7 +15,7 @@ public class MainScreen extends javax.swing.JPanel {
      * Creates new form MainScreen
      */
     public MainScreen() {
-        initComponents();
+        initComponents();        
     }
     
     public void updateDailyTasks()
@@ -117,7 +117,7 @@ public class MainScreen extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void calendarPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calendarPanel1MouseClicked
-        updateDailyTasks();      
+        updateDailyTasks();     
         
     }//GEN-LAST:event_calendarPanel1MouseClicked
 
