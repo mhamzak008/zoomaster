@@ -1,6 +1,9 @@
+package gui;
+import database.DatabaseManager;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -9,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import repository.Species;
+import repository.Animal;
+import repository.Plant;
 
 public class FirstPage extends JPanel {
 	static JLabel mainBackground;
@@ -118,17 +124,6 @@ public class FirstPage extends JPanel {
 		add(textField);
 		textField.setColumns(10);
 		
-		// Back Button
-		backButton = new JButton();																								
-		backButton.setFocusPainted(false);
-		backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		backButton.setIconTextGap(0);
-		backButton.setContentAreaFilled(false);
-		backButton.setBorder(null);
-		backButton.setBounds(756, 36, 34, 34);
-		backButton.setToolTipText("Click to go back Main Menu");
-		add(backButton);
-		
 		prevButton = new JButton();																								
 		prevButton.setFocusPainted(false);
 		prevButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -217,7 +212,18 @@ public class FirstPage extends JPanel {
 		btnNewButton.setBounds(662, 36, 75, 34);
 		btnNewButton.setForeground(Color.BLACK);
 		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 16));
+                btnNewButton.addActionListener(
+                new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        DatabaseManager db = DatabaseManager.getInstance();
+                        ArrayList <Species> species = db.getDataEntry("name");
+                        System.out.println(species.toString());
+                        textField_[0].setText("afsasf");
+                        textField_[1].setText(textField.getText());
+                    }
+                });
 		add(btnNewButton);
+
 		try {				
 			
 			btnSearch.setRolloverIcon(new ImageIcon(FirstPage.class.getResource("/Buttons/rollbutton2.png")));		//Start button icon when mouse entered 
