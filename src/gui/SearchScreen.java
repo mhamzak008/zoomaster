@@ -29,7 +29,9 @@ public class FirstPage extends JPanel {
 	static int currentID;
 	static int comboBoxNo = 0;
 	static int currentPage;
+        static int lastPage;
 	static JLabel lblNewLabel;
+        static ArrayList <Species> species;
 	/**
 	 * Create the panel.
 	 */
@@ -130,8 +132,24 @@ public class FirstPage extends JPanel {
 		prevButton.setIconTextGap(0);
 		prevButton.setContentAreaFilled(false);
 		prevButton.setBorder(null);
-		prevButton.setBounds(301, 507, 34, 34);
+		prevButton.setBounds(301, 485, 34, 34);
 		prevButton.setToolTipText("Click to go previous results");
+                prevButton.addActionListener(
+                    new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            if(currentPage!=1){
+                                currentPage--;
+                                for(int i = 0;i<6;i++)
+                      	    	textField_[i].setText("");
+				for(int i = (currentPage-1)*6;i<(currentPage)*6;i++){
+					textField_[i-(currentPage-1)*6].setText(species.get(i).getName()+" "+species.get(i).getsID());
+				}
+				lblNewLabel.setText(currentPage+" / "+lastPage);
+                        }
+                
+                    }
+                    }
+                );
 		add(prevButton);
 		
 		nextButton = new JButton();																								
@@ -140,8 +158,24 @@ public class FirstPage extends JPanel {
 		nextButton.setIconTextGap(0);
 		nextButton.setContentAreaFilled(false);
 		nextButton.setBorder(null);
-		nextButton.setBounds(465, 507, 34, 34);
+		nextButton.setBounds(465, 485, 34, 34);
 		nextButton.setToolTipText("Click to go next results");
+                nextButton.addActionListener(
+                    new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            if((currentPage)*6<species.size()){
+                                currentPage++;
+                                for(int i = 0;i<6;i++)
+                      	    	textField_[i].setText("");
+				for(int i = (currentPage-1)*6;i<(currentPage)*6;i++){
+					textField_[i-(currentPage-1)*6].setText(species.get(i).getName()+" "+species.get(i).getsID());
+				}
+				lblNewLabel.setText(currentPage+" / "+lastPage);
+                        }
+                
+                    }
+                    }
+                );
 		add(nextButton);
 		// Background Image
 		
@@ -202,7 +236,7 @@ public class FirstPage extends JPanel {
 		
 		lblNewLabel = new JLabel("-/-");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(345, 507, 110, 34);
+		lblNewLabel.setBounds(345, 485, 110, 34);
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Chalkduster", Font.BOLD, 16));
 		add(lblNewLabel);
@@ -215,11 +249,27 @@ public class FirstPage extends JPanel {
                 btnNewButton.addActionListener(
                 new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        currentPage = 1;
                         DatabaseManager db = DatabaseManager.getInstance();
-                        ArrayList <Species> species = db.getDataEntry("name");
-                        System.out.println(species.toString());
-                        textField_[0].setText("afsasf");
-                        textField_[1].setText(textField.getText());
+                        species = db.getDataEntry("name");
+                        if((species.size()/6)==0)
+                            lastPage=1;
+                        else{
+                            lastPage=(species.size()/6);
+                            if(species.size()%6!=0)
+				lastPage++;
+			}
+                        if(species.size()>6)
+                            for(int i = 0;i<6;i++){
+				textField_[i].setText(species.get(i).getName()+" "+species.get(i).getsID());
+                            }
+                        else
+                            for(int i = 0;i<species.size();i++){
+                                textField_[i].setText(species.get(i).getName()+" "+species.get(i).getsID());
+                            }
+                        lblNewLabel.setText(currentPage+" / "+lastPage);
+                        //textField_[0].setText(Integer.toString(species.size()));
+                        //textField_[1].setText(textField.getText());
                     }
                 });
 		add(btnNewButton);
@@ -256,3 +306,4 @@ public class FirstPage extends JPanel {
 		}
 	}
 }
+
