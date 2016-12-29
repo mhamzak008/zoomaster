@@ -286,6 +286,7 @@ public class DatabaseManager {
 	public ArrayList<Species> getDataEntry(String name){
 		Connection con = null;
 		Statement stmt = null;
+		Statement s = null;
 		ArrayList<Species> result = new ArrayList<Species>();
 		
 		final String DB_DRIVER = "com.mysql.jdbc.Driver";
@@ -302,6 +303,7 @@ public class DatabaseManager {
 			
 			// Create statement
 			stmt = con.createStatement();
+			s = con.createStatement();
 			
 			// Get species values
 			String sql = "SELECT * FROM species WHERE name LIKE '" + name + "%';	";
@@ -324,27 +326,34 @@ public class DatabaseManager {
 				
 				if(type == 0){
 					sql = "SELECT * FROM animal WHERE sID=" + sID + ";";
-					ResultSet r = stmt.executeQuery(sql);
+					ResultSet r = s.executeQuery(sql);
 					
-					char hibernate = r.getString("hibernate").charAt(0);
+					while(r.next()){
+						char hibernate = r.getString("hibernate").charAt(0);
+						
+						Animal a = new Animal(sID, hibernate, age, image, sName, feedingTime, lName, country, gender);
+						result.add(a);
+					}
 					
-					Animal a = new Animal(sID, hibernate, age, image, sName, feedingTime, lName, country, gender);
-					result.add(a);
 				}else{
 					sql = "SELECT * FROM plant WHERE sID=" + sID + ";";
-					ResultSet r = stmt.executeQuery(sql);
+					ResultSet r = s.executeQuery(sql);
 					
-					String lightTimeStart = r.getTime("light_time_start").toString(); 
-					String lightTimeEnd = r.getTime("light_time_end").toString(); 
-					Plant p = new Plant(sID, lightTimeStart, lightTimeEnd, age, image, sName, feedingTime, lName, country, gender);
-					result.add(p);
+					while(r.next()){
+						String lightTimeStart = r.getTime("light_time_start").toString(); 
+						String lightTimeEnd = r.getTime("light_time_end").toString(); 
+						Plant p = new Plant(sID, lightTimeStart, lightTimeEnd, age, image, sName, feedingTime, lName, country, gender);
+						result.add(p);
+					}
 				}
 				
 				
 			}
 		}catch(SQLException se){
+			se.printStackTrace();
 			return null;
 		}catch(Exception e){
+			e.printStackTrace();
 			return null;
 		}finally{
 			// Close statement and connection
@@ -358,6 +367,7 @@ public class DatabaseManager {
 			try{
 				if(con!=null) con.close();
 		    }catch(SQLException e){
+		    	e.printStackTrace();
 		         e.printStackTrace();
 		    }			
 		}
