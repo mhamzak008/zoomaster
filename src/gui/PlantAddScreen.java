@@ -18,6 +18,11 @@ public class PlantAddScreen extends javax.swing.JPanel {
         initComponents();
     }
     
+    public void clear()
+    {
+        lightToneTF.setText("");          
+    }
+    
     public String getWateringTime()
     {
        return wateringTimeTP.getTimeStringOrEmptyString();

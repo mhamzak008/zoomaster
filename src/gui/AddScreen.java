@@ -320,7 +320,12 @@ public class AddScreen extends javax.swing.JPanel {
     }//GEN-LAST:event_addBActionPerformed
 
     private void clearFormBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFormBActionPerformed
-        
+        ageS.setValue(0);
+        latinNameTF.setText("");
+        nameTF.setText("");
+        originCountryTF.setText("");
+        plantAddScreen1.clear();
+        animalAddScreen1.clear();
     }//GEN-LAST:event_clearFormBActionPerformed
 
 

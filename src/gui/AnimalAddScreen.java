@@ -18,6 +18,11 @@ public class AnimalAddScreen extends javax.swing.JPanel {
         initComponents();
     }
     
+    public void clear()
+    {
+        genderBG.clearSelection();
+    }
+    
     public String getGender()
     {
         if(femaleRB.isSelected())
@@ -34,7 +39,7 @@ public class AnimalAddScreen extends javax.swing.JPanel {
     
     public String getFeedingTime()
     {
-       return timePicker1.getTimeStringOrEmptyString();
+       return feedingTimeP.getTimeStringOrEmptyString();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,7 +55,7 @@ public class AnimalAddScreen extends javax.swing.JPanel {
         genderL = new javax.swing.JLabel();
         maleRB = new javax.swing.JRadioButton();
         femaleRB = new javax.swing.JRadioButton();
-        timePicker1 = new com.github.lgooddatepicker.components.TimePicker();
+        feedingTimeP = new com.github.lgooddatepicker.components.TimePicker();
 
         feedingTimeL.setText("Feeding Time:");
 
@@ -81,7 +86,7 @@ public class AnimalAddScreen extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(feedingTimeL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(feedingTimeP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(genderL)
                         .addGap(18, 18, 18)
@@ -95,7 +100,7 @@ public class AnimalAddScreen extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(feedingTimeL)
-                    .addComponent(timePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(feedingTimeP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(genderL)
@@ -116,10 +121,10 @@ public class AnimalAddScreen extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel feedingTimeL;
+    private com.github.lgooddatepicker.components.TimePicker feedingTimeP;
     private javax.swing.JRadioButton femaleRB;
     private javax.swing.ButtonGroup genderBG;
     private javax.swing.JLabel genderL;
     private javax.swing.JRadioButton maleRB;
-    private com.github.lgooddatepicker.components.TimePicker timePicker1;
     // End of variables declaration//GEN-END:variables
 }
