@@ -153,13 +153,10 @@ public class FirstPage extends JPanel {
 		add(textField);
 		textField.setColumns(10);
 		
-		prevButton = new JButton();																								
-		prevButton.setFocusPainted(false);
+		prevButton = new JButton();
+                prevButton.setText("Prev");
 		prevButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		prevButton.setIconTextGap(0);
-		prevButton.setContentAreaFilled(false);
-		prevButton.setBorder(null);
-		prevButton.setBounds(301, 485, 34, 34);
+		prevButton.setBounds(280, 485, 60, 34);
 		prevButton.setToolTipText("Click to go previous results");
                 prevButton.addActionListener(
                     new java.awt.event.ActionListener() {
@@ -179,13 +176,10 @@ public class FirstPage extends JPanel {
                 );
 		add(prevButton);
 		
-		nextButton = new JButton();																								
-		nextButton.setFocusPainted(false);
+		nextButton = new JButton();
+                nextButton.setText("Next");
 		nextButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		nextButton.setIconTextGap(0);
-		nextButton.setContentAreaFilled(false);
-		nextButton.setBorder(null);
-		nextButton.setBounds(465, 485, 34, 34);
+		nextButton.setBounds(465, 485, 60, 34);
 		nextButton.setToolTipText("Click to go next results");
                 nextButton.addActionListener(
                     new java.awt.event.ActionListener() {
@@ -282,8 +276,13 @@ public class FirstPage extends JPanel {
                 new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         currentPage = 1;
+                        for(int i = 0;i<6;i++)
+                      	    	textField_[i].setText("");
+                        for(int i = 0;i<6;i++)
+                      	    	textField_[i].setText("");
                         DatabaseManager db = DatabaseManager.getInstance();
                         species = db.getDataEntry(textField.getText());
+                        System.out.println(species.size());
                         if((species.size()/6)==0)
                             lastPage=1;
                         else{
@@ -293,11 +292,11 @@ public class FirstPage extends JPanel {
 			}
                         if(species.size()>6)
                             for(int i = 0;i<6;i++){
-				textField_[i].setText(species.get(i).getName()+" "+species.get(i).getsID());
+				textField_[i].setText(species.get(i).getName()+" with ID: "+species.get(i).getsID());
                             }
                         else
                             for(int i = 0;i<species.size();i++){
-                                textField_[i].setText(species.get(i).getName()+" "+species.get(i).getsID());
+                                textField_[i].setText(species.get(i).getName()+" with ID: "+species.get(i).getsID());
                             }
                         lblNewLabel.setText(currentPage+" / "+lastPage);
 

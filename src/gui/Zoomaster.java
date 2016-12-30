@@ -8,7 +8,7 @@ package gui;
 import database.DatabaseManager;
 import java.awt.Dimension;
 import javax.swing.JFrame;
-import security.PasswordManager;
+import repository.NotificationManager;
 
 /**
  *
@@ -55,7 +55,7 @@ public class Zoomaster extends javax.swing.JFrame {
         });
         jTabbedPane1.addTab("Main", mainScreen1);
         jTabbedPane1.addTab("Add", addScreen1);
-        jTabbedPane1.addTab("tab3", firstPage1);
+        jTabbedPane1.addTab("Search", firstPage1);
         jTabbedPane1.addTab("Change Password", passwordChangeScreen1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,6 +140,8 @@ public class Zoomaster extends javax.swing.JFrame {
         
         System.out.println("loop Exited");
         passFrame.dispose();
+        
+        NotificationManager note = new NotificationManager();
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
