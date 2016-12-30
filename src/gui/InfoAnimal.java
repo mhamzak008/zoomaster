@@ -20,9 +20,9 @@ import javax.swing.SwingConstants;
 import repository.Animal;
 
 public class InfoAnimal extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	public JTextField textField;
+	public JTextField textField_1;
+	public JTextField textField_2;
 
 	/**
 	 * Create the panel.
@@ -42,7 +42,6 @@ public class InfoAnimal extends JPanel {
 		textField = new JTextField();
                 textField.setColumns(10);
                 textField.setHorizontalAlignment(SwingConstants.LEFT);
-		textField.setForeground(new Color(255, 0, 51));
 		textField.setFont(new Font("Dialog", Font.BOLD, 16));
 		textField.setBounds(149, 3, 101, 36);
 		add(textField);
@@ -58,7 +57,6 @@ public class InfoAnimal extends JPanel {
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
                 textField_1.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_1.setForeground(new Color(255, 0, 51));
 		textField_1.setFont(new Font("Dialog", Font.BOLD, 16));
 		textField_1.setBounds(149, 50, 101, 36);
 		add(textField_1);
@@ -73,7 +71,6 @@ public class InfoAnimal extends JPanel {
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
                 textField_2.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_2.setForeground(new Color(255, 0, 51));
 		textField_2.setFont(new Font("Dialog", Font.BOLD, 16));
 		textField_2.setBounds(149, 97, 101, 36);
 		add(textField_2);
@@ -85,4 +82,5 @@ public class InfoAnimal extends JPanel {
             textField_2.setText(Character.toString(animal.doesHibernate()));
         }
 }
+
 
