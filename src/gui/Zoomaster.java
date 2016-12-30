@@ -110,18 +110,26 @@ public class Zoomaster extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>           
                         
-        // Setting up the database
-        DatabaseManager dm = DatabaseManager.getInstance();
+        // Setting up the database        
         boolean b;
-//        b = dm.createDatabase();
-//        System.out.println(b);
-//        b=dm.createTables();
-//        System.out.println(b);
-        b = dm.setID();        
-//        System.out.println(b);    
-//        b = dm.setPassword("hamza");
-//        System.out.println("Password Set: " + b);
-
+        if(DatabaseManager.exists() == false)
+        {
+            DatabaseManager dm = DatabaseManager.getInstance();
+            b = dm.createDatabase();
+            System.out.println(b);
+            b=dm.createTables();
+            System.out.println(b);    
+            b = dm.setID();
+            System.out.println(b);    
+            b = dm.setPassword("12345");
+            System.out.println("Password Set: " + b);
+        }
+        else
+        {
+            DatabaseManager dm = DatabaseManager.getInstance();
+            b = dm.setID();
+        }         
+        
         // Password Authentication
         JFrame passFrame = new JFrame();
         passFrame.setPreferredSize(new Dimension(500,250));
