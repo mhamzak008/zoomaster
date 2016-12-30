@@ -1,3 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package gui;
+
+/**
+ *
+ * @author Ugur Can
+ */
 import javax.swing.JPanel;
 
 import java.awt.Color;
@@ -6,17 +17,18 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import repository.Plant;
 
 public class InfoPlant extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	public JTextField textField;
+	public JTextField textField_1;
+	public JTextField textField_2;
 
 	/**
 	 * Create the panel.
 	 */
 	public InfoPlant() {
-		setBounds(0, 0, 250, 150);																							
+		setBounds(0, 0, 500, 150);																							
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Gender");
@@ -28,7 +40,7 @@ public class InfoPlant extends JPanel {
 		
 		textField = new JTextField();
 		textField.setBounds(149, 0, 101, 36);
-		
+		textField.setFont(new Font("Dialog", Font.BOLD, 16));
 		add(textField);
 		textField.setColumns(10);
 		
@@ -41,6 +53,7 @@ public class InfoPlant extends JPanel {
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
+                textField_1.setFont(new Font("Dialog", Font.BOLD, 16));
 		textField_1.setBounds(149, 50, 101, 36);
 		add(textField_1);
 		
@@ -53,7 +66,14 @@ public class InfoPlant extends JPanel {
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(149, 94, 101, 36);
+                textField_2.setFont(new Font("Dialog", Font.BOLD, 16));
+		textField_2.setBounds(149, 94, 200, 36);
 		add(textField_2);
 	}
+        public void modify(Plant plant){
+            System.out.println(plant.getFeedingTime());
+            textField.setText(plant.getGender());
+            textField_1.setText(plant.getFeedingTime());
+            textField_2.setText(plant.getLightTimeStart()+"-"+plant.getLightTimeEnd());
+        }
 }
