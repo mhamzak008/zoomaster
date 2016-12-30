@@ -614,4 +614,13 @@ public class DatabaseManager {
 		}
 		return instance;
 	}
+        
+        public static boolean exists()
+        {
+            if(instance == null)
+            {
+                return false;
+            }
+            return true;
+        }
 }
