@@ -1,7 +1,9 @@
 package gui;
 
-
+import database.DatabaseManager;
+import static gui.FirstPage.species;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Font;
 
@@ -17,6 +19,9 @@ import java.awt.SystemColor;
 import javax.swing.UIManager;
 import javax.swing.JLayeredPane;
 import javax.swing.JRadioButton;
+import repository.Animal;
+import repository.Plant;
+import repository.Species;
 
 public class DetailedInfoPanel extends JPanel {
 	JLabel mainBackground;
@@ -34,16 +39,16 @@ public class DetailedInfoPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public DetailedInfoPanel() {
+	public DetailedInfoPanel(Species species) {
 		
-
 		setBounds(0, 0, 800, 600);																							
 		setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("");
+		JLabel lblNewLabel = new JLabel(new ImageIcon(species.getImage()));
 		lblNewLabel.setBounds(479, 141, 253, 231);
 		add(lblNewLabel);
 		
+                
 		txtName = new JLabel();
 		txtName.setHorizontalAlignment(SwingConstants.LEFT);
 		//txtName.setBackground(UIManager.getColor("Button.background"));
@@ -54,12 +59,11 @@ public class DetailedInfoPanel extends JPanel {
 		add(txtName);
 		
 		txtCountryOfOrigin = new JTextField();
+                txtCountryOfOrigin.setText(species.getName());
 		txtCountryOfOrigin.setHorizontalAlignment(SwingConstants.LEFT);
-		txtCountryOfOrigin.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		txtCountryOfOrigin.setBounds(196, 142, 239, 36);
 		txtCountryOfOrigin.setFont(new Font("Chalkduster", Font.BOLD, 16));
 		txtCountryOfOrigin.setForeground(Color.BLACK);
-		txtCountryOfOrigin.setText("");
 		
 		add(txtCountryOfOrigin);
 		txtCountryOfOrigin.setColumns(10);
@@ -86,19 +90,25 @@ public class DetailedInfoPanel extends JPanel {
 		mainBackground.setBounds(-23, -88, 1448, 886);
 		
 		btnSearch = new JButton("Delete");																					
-		btnSearch.setFocusPainted(false);
-		btnSearch.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSearch.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnSearch.setFont(new Font("Chalkduster", Font.BOLD, 16));
-		btnSearch.setForeground(Color.WHITE);
-		btnSearch.setContentAreaFilled(false);
-		btnSearch.setBorder(null);
-		btnSearch.setBounds(330, 504, 133, 45);
+		btnSearch.setFont(new Font("Chalkduster", Font.BOLD, 16));;
+		btnSearch.setBounds(316, 504, 153, 45);
 		//btnSearch.addActionListener(new SearchPanelListener());
 		btnSearch.setToolTipText("Information about the Search");
+                btnSearch.addActionListener(
+                    new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            DatabaseManager db = DatabaseManager.getInstance();
+                            db.removeDataEntry(species.getsID(), species.getType());
+                            setVisible(false); //you can't see me!
+                            FirstPage.detailFrame.dispose();
+                        }
+                    }
+                );
 		add(btnSearch);
 		
 		txtPseudonym = new JTextField();
+                txtPseudonym.setText(species.getCountry());
 		txtPseudonym.setHorizontalAlignment(SwingConstants.LEFT);
 		txtPseudonym.setForeground(Color.BLACK);
 		txtPseudonym.setFont(new Font("Dialog", Font.BOLD, 16));
@@ -115,6 +125,7 @@ public class DetailedInfoPanel extends JPanel {
 		add(lblImageLink);
 		
 		txtLausanne = new JTextField();
+                txtLausanne.setText(species.getLatinName());
 		txtLausanne.setHorizontalAlignment(SwingConstants.LEFT);
 		txtLausanne.setForeground(Color.BLACK);
 		txtLausanne.setFont(new Font("Dialog", Font.BOLD, 16));
@@ -124,6 +135,7 @@ public class DetailedInfoPanel extends JPanel {
 		
 		txtDasdasgasgasgasgas = new JTextField();
 		txtDasdasgasgasgasgas.setHorizontalAlignment(SwingConstants.LEFT);
+                txtDasdasgasgasgasgas.setText(Integer.toString(species.getAge()));
 		txtDasdasgasgasgasgas.setForeground(Color.BLACK);
 		txtDasdasgasgasgasgas.setFont(new Font("Dialog", Font.BOLD, 16));
 		txtDasdasgasgasgasgas.setColumns(10);
@@ -138,25 +150,58 @@ public class DetailedInfoPanel extends JPanel {
 		lblNewAuthor.setBounds(10, 11, 780, 63);
 		add(lblNewAuthor);
 		
-		infoPlant = new InfoPlant();
+                JPanel pane = new JPanel();
+                pane.setBounds(46, 329, 500, 132);
+                
+                infoPlant = new InfoPlant();
 		infoAnimal = new InfoAnimal();
 		JLayeredPane layeredPane = new JLayeredPane();
-		layeredPane.setBounds(46, 329, 250, 172);
+		layeredPane.setBounds(46, 329, 500, 132);
 		layeredPane.add(infoPlant);
 		layeredPane.add(infoAnimal);
-		infoPlant.setVisible(true);
-		infoAnimal.setVisible(false);
+
+                if(species.getType()==0){
+                    infoAnimal.modify((Animal)species);
+                    infoPlant.setVisible(false);
+                    infoAnimal.setVisible(true);
+                }
+                else{
+                    infoPlant.modify((Plant)species);
+                    infoPlant.setVisible(true);
+                    infoAnimal.setVisible(false);
+                }
 		add(layeredPane);
-		try {
-			mainBackground.setIcon(new ImageIcon(DetailedInfoPanel.class.getResource("/Background/Background2.jpg")));
-			btnSearch.setRolloverIcon(new ImageIcon(DetailedInfoPanel.class.getResource("/Buttons/rollhardbutton.png")));		//Start button icon when mouse entered 
-			btnSearch.setIcon(new ImageIcon(DetailedInfoPanel.class.getResource("/Buttons/hardbutton.png")));
-			
+                
+                JButton button = new JButton("Modify");
+		button.setToolTipText("Information about the Search");
+		button.setHorizontalTextPosition(SwingConstants.CENTER);
+		button.setFont(new Font("Dialog", Font.BOLD, 16));
+		button.setBounds(316, 461, 153, 45);
+                button.addActionListener(
+                    new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            DatabaseManager db = DatabaseManager.getInstance();
+                            Species s;
+                            
+                            if(species.getType()==0){
 
-			
-
-			add(mainBackground);
-		}catch (NullPointerException e2) {
-		}
+                                s = new Animal(species.getsID(), infoAnimal.textField_2.getText().charAt(0),Integer.parseInt(txtDasdasgasgasgasgas.getText()), species.getImage(), txtCountryOfOrigin.getText(), 
+                                       infoAnimal.textField_1.getText(), txtLausanne.getText(), txtPseudonym.getText(), 
+                                       infoAnimal.textField.getText());
+                            }
+                            else{
+                                s = new Plant(species.getsID(), infoPlant.textField_2.getText().substring(0, 8), infoPlant.textField_2.getText().substring(9, 17),
+                                    Integer.parseInt(txtDasdasgasgasgasgas.getText()), species.getImage(), txtCountryOfOrigin.getText(), infoPlant.textField_1.getText(), 
+                                    txtLausanne.getText(), txtPseudonym.getText(), infoPlant.textField.getText());
+                            }
+                            
+                            db.modifyDataEntry(s);
+                            setVisible(false); //you can't see me!
+                            FirstPage.detailFrame.dispose();
+                        }
+                    }
+                );
+		add(button);
+                
 	}
 }
