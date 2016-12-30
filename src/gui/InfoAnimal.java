@@ -1,3 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package gui;
+
+/**
+ *
+ * @author Ugur Can
+ */
 import javax.swing.JPanel;
 
 import java.awt.Color;
@@ -6,6 +17,7 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import repository.Animal;
 
 public class InfoAnimal extends JPanel {
 	private JTextField textField;
@@ -28,9 +40,13 @@ public class InfoAnimal extends JPanel {
 		add(lblNewLabel);
 		
 		textField = new JTextField();
+                textField.setColumns(10);
+                textField.setHorizontalAlignment(SwingConstants.LEFT);
+		textField.setForeground(new Color(255, 0, 51));
+		textField.setFont(new Font("Dialog", Font.BOLD, 16));
 		textField.setBounds(149, 3, 101, 36);
 		add(textField);
-		textField.setColumns(10);
+
 		
 		JLabel lblFeedingTime = new JLabel("Feeding Time");
 		lblFeedingTime.setBounds(0, 47, 124, 36);
@@ -41,6 +57,9 @@ public class InfoAnimal extends JPanel {
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
+                textField_1.setHorizontalAlignment(SwingConstants.LEFT);
+		textField_1.setForeground(new Color(255, 0, 51));
+		textField_1.setFont(new Font("Dialog", Font.BOLD, 16));
 		textField_1.setBounds(149, 50, 101, 36);
 		add(textField_1);
 		
@@ -53,7 +72,17 @@ public class InfoAnimal extends JPanel {
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
+                textField_2.setHorizontalAlignment(SwingConstants.LEFT);
+		textField_2.setForeground(new Color(255, 0, 51));
+		textField_2.setFont(new Font("Dialog", Font.BOLD, 16));
 		textField_2.setBounds(149, 97, 101, 36);
 		add(textField_2);
 	}
+        public void modify(Animal animal){
+            System.out.println(animal.getFeedingTime());
+            textField.setText(animal.getGender());
+            textField_1.setText(animal.getFeedingTime());
+            textField_2.setText(Character.toString(animal.doesHibernate()));
+        }
 }
+
