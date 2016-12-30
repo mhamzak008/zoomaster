@@ -332,6 +332,7 @@ public class AddScreen extends javax.swing.JPanel {
         originCountryTF.setText("");
         plantAddScreen1.clear();
         animalAddScreen1.clear();
+        imageL.setIcon(new ImageIcon());
     }//GEN-LAST:event_clearFormBActionPerformed
 
 
